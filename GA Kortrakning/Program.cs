@@ -29,6 +29,7 @@ class Program
             Console.Clear();
 
             Console.WriteLine("Antal kort kvar: " + kortlek.Count());
+            //Console.WriteLine("Running count: " + kortlek.RunningCount);
             spelare.WriteHand();
             Croupier.WriteHand();
         }
@@ -114,7 +115,8 @@ class Program
             }
 
             if (spelare.Chips <= 0){
-                Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + "vunna händer.");
+                Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + " vunna händer.");
+                Console.WriteLine("Dina chips har återställts.");
 
                 spelare = new Spelare();
             }
@@ -126,6 +128,22 @@ class Program
         }
         
         static void StartaRunda(){
+            
+            //Betta
+            Console.Write("Chips: " + spelare.Chips);
+            Console.WriteLine("   " + "Running count: " + kortlek.RunningCount);
+            Console.WriteLine("Lägg ett bet för att spela: ");
+            int b = int.Parse(Console.ReadLine());
+
+            if (b <= spelare.Chips)
+                spelare.Betta(b);
+
+            else{
+                Console.WriteLine("Felaktigt bet!");
+                StartaRunda();
+            }
+
+            //Ta kort
             kortlek.Shuffle();
             spelare.Hand = kortlek.TakeHand();
             
@@ -143,18 +161,7 @@ class Program
             }
             Croupier.RevealCard();
 
-            //Betta
-            Console.WriteLine("Chips: " + spelare.Chips);
-            Console.WriteLine("Lägg ett bet för att spela: ");
-            int b = int.Parse(Console.ReadLine());
-
-            if (b <= spelare.Chips)
-                spelare.Betta(b);
-
-            else{
-                Console.WriteLine("Felaktigt bet!");
-                StartaRunda();
-            }
+            
             
 
             //Visa Kort
@@ -181,6 +188,8 @@ class Program
             
             while (Croupier.HandSumma() <= 16){
                 Croupier.VisadeKort.Add(kortlek.TakeCard());
+
+                Thread.Sleep(1000);
 
                 Console.Clear();
                 spelare.WriteHand();

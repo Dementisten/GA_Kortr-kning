@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 class Kortlek{
     public List<Kort> kortlek = new List<Kort>();
+
+    public int RunningCount {get; set;}
+
     public void FillDeck(){
         for (int i = 0; i < 13; i++)
         {
@@ -27,14 +30,20 @@ class Kortlek{
     public Kort TakeCard(){
         Kort k = kortlek[0];
         kortlek.RemoveAt(0);
+
+        if (k.Valör >= 10){
+            RunningCount--;
+        }
+        else if (k.Valör <= 6){
+            RunningCount++;
+        }
         return k;
     }
 
     public List<Kort> TakeHand(){
         List<Kort> hand = new List<Kort>();
-        hand.Add(kortlek[0]);
-        hand.Add(kortlek[1]);
-        kortlek.RemoveRange(0, 2);
+        hand.Add(TakeCard());
+        hand.Add(TakeCard());
         return hand;
     }
 
