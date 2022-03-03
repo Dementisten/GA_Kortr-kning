@@ -78,8 +78,7 @@ class Program
                         }
                     }
                 }
-            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
-                && spelare.HandSumma() <= 21);
+            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE") && spelare.HandSumma() <= 21);
         }
         }
 
@@ -88,27 +87,34 @@ class Program
                 case Resultat.Lika:
                     spelare.ReturnBet();
                     Console.WriteLine("Lika");
+                    spelare.SpeladeHänder++;
                     break;
                 case Resultat.SpelareVinner:
                     spelare.Vinst(false);
                     Console.WriteLine("Spelare vann ");
+                    spelare.SpeladeHänder++;
+                    spelare.VunnaHänder++;
                     break;
                 case Resultat.SpelareTjock:
                     spelare.ClearBet();
                     Console.WriteLine("Spelare tjock");
+                    spelare.SpeladeHänder++;
                     break;
                 case Resultat.SpelareBlackjack:
                     spelare.Vinst(true);
                     Console.WriteLine("Spelare vann med blackjack ");
+                    spelare.SpeladeHänder++;
+                    spelare.VunnaHänder++;
                     break;
                 case Resultat.DealerVinner:
                     spelare.ClearBet();
                     Console.WriteLine("Croupieren vann");
+                    spelare.SpeladeHänder++;
                     break;
             }
 
             if (spelare.Chips <= 0){
-                Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor.");
+                Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + "vunna händer.");
 
                 spelare = new Spelare();
             }
@@ -172,8 +178,13 @@ class Program
             }
 
             //Croupier spelar
+            
             while (Croupier.HandSumma() <= 16){
                 Croupier.VisadeKort.Add(kortlek.TakeCard());
+
+                Console.Clear();
+                spelare.WriteHand();
+                Croupier.WriteHand();
             }
 
             if (Croupier.HandSumma() > 21){
@@ -191,8 +202,8 @@ class Program
 
 
 
-
-
+            AvslutaRunda(Resultat.DealerVinner);
+            Console.WriteLine("TEST");
 
 
         }

@@ -2,6 +2,7 @@ class Spelare{
     public int Chips {get; set;} = 10000;
     public int Bet {get; set;}
     public int SpeladeHänder {get; set;}
+    public int VunnaHänder {get; set;}
 
     public List<Kort> Hand {get; set;}
 
@@ -49,6 +50,8 @@ class Spelare{
             Console.Write(Chips + "  ");
             Console.Write("Rundor körda: ");
             Console.Write(SpeladeHänder + " ");
+            Console.Write("Rundor vunna: ");
+            Console.Write(VunnaHänder + " ");
 
             Console.WriteLine();
             Console.WriteLine("Din hand: " + HandSumma());
