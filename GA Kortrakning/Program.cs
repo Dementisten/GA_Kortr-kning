@@ -133,15 +133,22 @@ class Program
             Console.Write("Chips: " + spelare.Chips);
             Console.WriteLine("   " + "Running count: " + kortlek.RunningCount);
             Console.WriteLine("Lägg ett bet för att spela: ");
-            int b = int.Parse(Console.ReadLine());
+            try{
+                int b = int.Parse(Console.ReadLine());
 
-            if (b <= spelare.Chips)
-                spelare.Betta(b);
+                if (b <= spelare.Chips)
+                    spelare.Betta(b);
 
-            else{
-                Console.WriteLine("Felaktigt bet!");
+                else{
+                    Console.WriteLine("Felaktigt bet!");
+                    StartaRunda();
+                }    
+            }
+            catch{
+                Console.WriteLine("Ange ett heltal");
                 StartaRunda();
             }
+            
 
             //Ta kort
             kortlek.Shuffle();

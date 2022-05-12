@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ville\\Desktop\\GA Kortrakning\\GA Kortrakning.csproj": {}
+    "C:\\Users\\Admin\\Downloads\\GA_Kortr-kning-main\\GA_Kortr-kning-main\\GA Kortrakning\\GA Kortrakning.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ville\\Desktop\\GA Kortrakning\\GA Kortrakning.csproj": {
+    "C:\\Users\\Admin\\Downloads\\GA_Kortr-kning-main\\GA_Kortr-kning-main\\GA Kortrakning\\GA Kortrakning.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ville\\Desktop\\GA Kortrakning\\GA Kortrakning.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Downloads\\GA_Kortr-kning-main\\GA_Kortr-kning-main\\GA Kortrakning\\GA Kortrakning.csproj",
         "projectName": "GA Kortrakning",
-        "projectPath": "C:\\Users\\ville\\Desktop\\GA Kortrakning\\GA Kortrakning.csproj",
-        "packagesPath": "C:\\Users\\ville\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ville\\Desktop\\GA Kortrakning\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Downloads\\GA_Kortr-kning-main\\GA_Kortr-kning-main\\GA Kortrakning\\GA Kortrakning.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Downloads\\GA_Kortr-kning-main\\GA_Kortr-kning-main\\GA Kortrakning\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ville\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
