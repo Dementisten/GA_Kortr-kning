@@ -6,6 +6,8 @@ class Program
         private static Kortlek kortlek = new Kortlek();
         private static Spelare spelare = new Spelare();
 
+        int Highscore = 1;
+
         private enum Resultat
         {
             Lika,
@@ -112,16 +114,16 @@ class Program
                     spelare.SpeladeHänder++;
                     break;
             }
-            int Highscore = 1;
-            if(spelare.Chips > Highscore)
-                Highscore = spelare.Chips;
+            
+            if(spelare.Chips > spelare.Highscore)
+                spelare.Highscore = spelare.Chips;
 
             if (spelare.Chips <= 0){
                 Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + " vunna händer.");
                 Console.WriteLine("Dina chips har återställts.");
 
                 StreamWriter sw = new StreamWriter("Textfil.txt", true);
-                sw.WriteLine(Highscore);
+                sw.WriteLine("Highscore: " + spelare.Highscore + " chips");
                 sw.Close();
                 spelare = new Spelare();
             }

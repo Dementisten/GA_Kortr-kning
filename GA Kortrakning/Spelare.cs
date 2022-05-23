@@ -3,6 +3,7 @@ class Spelare{
     public int Bet {get; set;}
     public int SpeladeHänder {get; set;}
     public int VunnaHänder {get; set;}
+    public int Highscore {get; set;}
 
     public List<Kort> Hand {get; set;}
 

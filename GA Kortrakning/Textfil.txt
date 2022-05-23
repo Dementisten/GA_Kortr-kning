@@ -1,2 +1,2 @@
-
-1
+Highscore: 20000 chips
+Highscore: 100000 chips
