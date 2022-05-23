@@ -7,13 +7,17 @@ class Kortlek{
     public int RunningCount {get; set;}
 
     public void FillDeck(){
-        for (int i = 0; i < 13; i++)
+        for(int a = 0; a < 6; a++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int i = 0; i < 13; i++)
             {
-                kortlek.Add(new Kort((Suites)j, (Face)i));
+                for (int j = 0; j < 4; j++)
+                {
+                    kortlek.Add(new Kort((Suites)j, (Face)i));
+                }
             }
         }
+        
     }
 
     static Random r = new Random();

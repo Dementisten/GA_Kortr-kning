@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.IO;
+// See https://aka.ms/new-console-template for more information
 class Program
     {
 
@@ -27,9 +28,7 @@ class Program
 
         static void Text(){
             Console.Clear();
-
             Console.WriteLine("Antal kort kvar: " + kortlek.Count());
-            //Console.WriteLine("Running count: " + kortlek.RunningCount);
             spelare.WriteHand();
             Croupier.WriteHand();
         }
@@ -63,7 +62,7 @@ class Program
                         spelare.Hand.Add(kortlek.TakeCard());
                         break;
                     default:
-                        Console.WriteLine("Hit, Stand, Double");
+                        Console.WriteLine("Hit, Stand eller Double");
                         Console.ReadKey();
                         break;
                 }
@@ -113,13 +112,20 @@ class Program
                     spelare.SpeladeHänder++;
                     break;
             }
+            int Highscore = 1;
+            if(spelare.Chips > Highscore)
+                Highscore = spelare.Chips;
 
             if (spelare.Chips <= 0){
                 Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + " vunna händer.");
                 Console.WriteLine("Dina chips har återställts.");
 
+                StreamWriter sw = new StreamWriter("Textfil.txt", true);
+                sw.WriteLine(Highscore);
+                sw.Close();
                 spelare = new Spelare();
             }
+            
 
             Console.WriteLine("Tryck för att fortsätta.");
             Console.ReadLine();
@@ -132,6 +138,7 @@ class Program
             //Betta
             Console.Write("Chips: " + spelare.Chips);
             Console.WriteLine("   " + "Running count: " + kortlek.RunningCount);
+            Console.WriteLine("Antal kort kvar: " + kortlek.Count());
             Console.WriteLine("Lägg ett bet för att spela: ");
             try{
                 int b = int.Parse(Console.ReadLine());
@@ -226,11 +233,6 @@ class Program
         
         static void Main(string[] args)
         {
-            kortlek.FillDeck();
-            kortlek.FillDeck();
-            kortlek.FillDeck();
-            kortlek.FillDeck();
-            kortlek.FillDeck();
             kortlek.FillDeck();
             StartaRunda();
         }
