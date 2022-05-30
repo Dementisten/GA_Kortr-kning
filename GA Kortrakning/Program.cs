@@ -8,6 +8,7 @@ class Program
 
         int Highscore = 1;
 
+        //Olika enum som beskriver de olika resultaten som kan bli av en runda
         private enum Resultat
         {
             Lika,
@@ -17,7 +18,7 @@ class Program
             DealerVinner,
             FelBet
         }
-
+        //Kollar om handen är blackjack eller inte och returnerar en bool true eller false
         public bool IsHandBlackjack(List<Kort> hand)
         {
             if (hand.Count == 2)
@@ -27,14 +28,14 @@ class Program
             }
             return false;
         }
-
+        //Enkel metod som skriver ut lite information om rundan
         static void Text(){
             Console.Clear();
             Console.WriteLine("Antal kort kvar: " + kortlek.Count());
             spelare.WriteHand();
             Croupier.WriteHand();
         }
-
+        //Action är den metod som anropas när spelaren ska göra ett val i rundan, den består av en loop som loopas tills spelaren väljer Stand eller Double eller har över 21
         static void Action(){
             {
             string action;
@@ -47,8 +48,10 @@ class Program
                 Console.Write("Vad vill du göra? ");
                 action = Console.ReadLine();
 
+                //Byter det till stora bokstäver för att alla kombinationer av stora och små ska funka för användaren
                 switch (action.ToUpper())
                 {
+                    //För varje val finns ett case som gör olika saker
                     case "HIT":
                         spelare.Hand.Add(kortlek.TakeCard());
                         break;
@@ -69,6 +72,8 @@ class Program
                         break;
                 }
 
+                //Om spelarens handsumma är över 21 så kollar man om ett av spelarens kort är ett ess och såfall konverterar man det till en etta enligt blackjack regler
+                //Annars bryts loopen
                 if (spelare.HandSumma() > 21)
                 {
                     foreach (Kort kort in spelare.Hand)
@@ -83,7 +88,7 @@ class Program
             } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE") && spelare.HandSumma() <= 21);
         }
         }
-
+        //Här kommer de enum från början in igen och för varje resultat så betalas olika summor ut och statistiken uppdateras
         static void AvslutaRunda(Resultat resultat){
             switch (resultat){
                 case Resultat.Lika:
@@ -115,6 +120,7 @@ class Program
                     break;
             }
             
+            //Efter varje vinst eller förlust kollas spelarens chips och jämförs med highscore, om det är högre än highscore blir highscoret mängden chips spelaren har
             if(spelare.Chips > spelare.Highscore)
                 spelare.Highscore = spelare.Chips;
 
@@ -122,6 +128,7 @@ class Program
                 Console.WriteLine("Spelare bankrupt efter " + spelare.SpeladeHänder + " rundor och " + spelare.VunnaHänder + " vunna händer.");
                 Console.WriteLine("Dina chips har återställts.");
 
+                //När spelaren blir bankrupt startar spelet om och chipsen återställs. Innan det så skrivs highscore ut i Textfil.txt
                 StreamWriter sw = new StreamWriter("Textfil.txt", true);
                 sw.WriteLine("Highscore: " + spelare.Highscore + " chips");
                 sw.Close();
@@ -166,6 +173,7 @@ class Program
             Croupier.GömdaKort = kortlek.TakeHand();
             Croupier.VisadeKort = new List<Kort>();
 
+            //Om båda korten i handen är ess konverteras ett av dem till en etta, för både spelaren och croupieren
             if (spelare.Hand[0].Face == Face.Ess && spelare.Hand[1].Face == Face.Ess)
             {
                 spelare.Hand[1].Valör = 1;
@@ -183,12 +191,12 @@ class Program
             //Visa Kort
             Text();
 
-            //Blackjack?
+            //Kollar om spelaren har blackjack och avslutar såfall rundan med resultaten SpelareBlackjack
             if (spelare.HandSumma() == 21){
                 AvslutaRunda(Resultat.SpelareBlackjack);
             }
 
-            //Spela
+            //Här får spelaren göra sina val
             Action();
 
             //Visa Kort igen
@@ -201,7 +209,7 @@ class Program
             }
 
             //Croupier spelar
-            
+            //Om croupieren får 17 eller över slutar den ta kort
             while (Croupier.HandSumma() <= 16){
                 Croupier.VisadeKort.Add(kortlek.TakeCard());
 
@@ -211,7 +219,7 @@ class Program
                 spelare.WriteHand();
                 Croupier.WriteHand();
             }
-
+            //Om croupieren har över 21 så vinner spelaren direkt eftersom vi redan kollat så spelaren inte är tjock
             if (Croupier.HandSumma() > 21){
                 AvslutaRunda(Resultat.SpelareVinner);
             }
@@ -226,15 +234,15 @@ class Program
 
 
 
-
+            //Om spelaren inte vann eller det blev lika ännu så vinner Croupieren
             AvslutaRunda(Resultat.DealerVinner);
-            Console.WriteLine("TEST");
 
 
         }
         
         static void Main(string[] args)
         {
+            //Kortleken läggs till här istället för i StartaRunda() för att det ska vara möjligt att räkna kort. Om man lägger den i StartaRunda kommer den fyllas på varje gång en runda startar och det går inte längre räkna korten
             kortlek.FillDeck();
             StartaRunda();
         }

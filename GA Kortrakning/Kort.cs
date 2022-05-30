@@ -30,7 +30,7 @@ class Kort{
     {
         Face = face;
         Färg = färg;
-
+        //Byter ut klädda kort till deras blackjack värde, alltså 10 för alla klädda och 11 för ess
         switch (Face)
             {
                 case Tio:
@@ -54,6 +54,7 @@ class Kort{
 
     public Suites Färg{get; set;}
 
+    //Skriver ut kortet, används i WriteHand för både Croupier och Spelare
     public void SkrivKort(){
         Console.WriteLine(Färg + " " + Face);
     }
